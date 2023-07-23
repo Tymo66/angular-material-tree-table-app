@@ -1,0 +1,44 @@
+<!-- mat-tree -->
+<mat-tree [dataSource]="dataSource" class="example-tree">
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+      <li>
+        {{ node.name }}
+        <ul [hidden]="!node.children?.length">
+          <ng-container matTreeNodeOutlet></ng-container>
+        </ul>
+      </li>
+    </mat-tree-node>
+    <ng-container matTreeNodeOutlet></ng-container>
+  </mat-tree>
+  
+  <!-- mat-table -->
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Type</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-form-field appearance="outline">
+          <mat-label>Type</mat-label>
+          <mat-select [(value)]="element.type">
+            <mat-option value="Fruit">Fruit</mat-option>
+            <mat-option value="Vegetable">Vegetable</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <!-- Add actions here if needed -->
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
